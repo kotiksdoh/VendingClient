@@ -1,0 +1,270 @@
+/* Общие стили */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.app-container {
+  min-height: 100vh;
+  background-image: url('./assets/Main.png'); /* Ваш фоновый рисунок */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+}
+
+/* Затемнение для лучшей читаемости текста (опционально) */
+.app-container::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой */
+  z-index: 1;
+}
+
+.app-container > * {
+  position: relative;
+  z-index: 2;
+}
+
+/* Верхняя панель */
+.top-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px 40px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.phone-number,
+.phone-number-right {
+  font-size: 18px;
+  font-weight: 600;
+  color: #333;
+  background: #f0f0f0;
+  padding: 8px 16px;
+  border-radius: 25px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 10px 24px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 25px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.home-button:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+/* Основной контент */
+.main-content {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px;
+}
+
+/* Контейнер с 4 кнопками */
+.main-buttons-container {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 30px;
+  max-width: 800px;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Стили для основных кнопок */
+.main-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border: none;
+  padding: 40px 20px;
+  font-size: 24px;
+  font-weight: bold;
+  border-radius: 20px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 15px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.main-button:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 15px 40px rgba(0, 0, 0, 0.3);
+}
+
+.main-button:active {
+  transform: translateY(0);
+}
+
+.button-icon {
+  font-size: 48px;
+}
+
+/* Индивидуальные цвета для кнопок */
+.scan-button {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+}
+
+.print-button {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.copy-button {
+  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+}
+
+.ad-button {
+  background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);
+}
+
+/* Нижняя панель */
+.bottom-bar {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 20px;
+  background: rgba(255, 255, 255, 0.95);
+  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
+}
+
+.support-button {
+  background: #ff9800;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 18px;
+  font-weight: 600;
+  border-radius: 30px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.support-button:hover {
+  background: #f57c00;
+  transform: scale(1.05);
+}
+
+/* Стили для страниц-заглушек */
+.other-page {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  padding: 40px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+}
+
+.other-page h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.other-page p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.back-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 24px;
+  font-size: 16px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+.back-button:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+/* Адаптивность для планшетов */
+@media (max-width: 768px) {
+  .main-buttons-container {
+    gap: 20px;
+  }
+
+  .main-button {
+    padding: 30px 15px;
+    font-size: 20px;
+  }
+
+  .button-icon {
+    font-size: 36px;
+  }
+
+  .top-bar {
+    padding: 15px 20px;
+  }
+
+  .phone-number,
+  .phone-number-right {
+    font-size: 14px;
+    padding: 6px 12px;
+  }
+
+  .home-button {
+    padding: 8px 16px;
+    font-size: 14px;
+  }
+}
+
+/* Адаптивность для мобильных телефонов */
+@media (max-width: 480px) {
+  .main-buttons-container {
+    grid-template-columns: 1fr;
+    gap: 15px;
+  }
+
+  .top-bar {
+    flex-direction: column;
+    gap: 10px;
+    text-align: center;
+  }
+
+  .phone-number-right {
+    display: none; /* Скрываем правый номер на мобильных */
+  }
+
+  .main-button {
+    padding: 20px 15px;
+    font-size: 18px;
+  }
+
+  .button-icon {
+    font-size: 32px;
+  }
+}
