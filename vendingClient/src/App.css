@@ -18,16 +18,7 @@
 }
 
 /* Затемнение для лучшей читаемости текста (опционально) */
-.app-container::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  background: rgba(0, 0, 0, 0.5); /* Полупрозрачный черный слой */
-  z-index: 1;
-}
+
 
 .app-container > * {
   position: relative;
@@ -40,8 +31,8 @@
   justify-content: space-between;
   align-items: center;
   padding: 20px 40px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+  /* background: rgba(255, 255, 255, 0.95); */
+  /* box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); */
 }
 
 .phone-number,
@@ -81,19 +72,14 @@
 .main-content {
   flex: 1;
   display: flex;
-  align-items: center;
-  justify-content: center;
   padding: 40px;
+  padding-top: 300px;
 }
 
 /* Контейнер с 4 кнопками */
 .main-buttons-container {
-  display: grid;
-  grid-template-columns: repeat(2, 1fr);
-  gap: 30px;
-  max-width: 800px;
-  width: 100%;
-  padding: 20px;
+  /* gap: 30px;
+  padding: 20px; */
 }
 
 /* Стили для основных кнопок */
@@ -128,8 +114,25 @@
 }
 
 /* Индивидуальные цвета для кнопок */
+.button-wrapper{
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
 .scan-button {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  /* background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); */
+  background-image: url('./assets/Rectangle1.png');
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-attachment: fixed;
+
+}
+
+.decoration-scan{
+  position: absolute;
+  top: 20;
+  left: 20
 }
 
 .print-button {
@@ -150,8 +153,6 @@
   justify-content: center;
   align-items: center;
   padding: 20px;
-  background: rgba(255, 255, 255, 0.95);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.1);
 }
 
 .support-button {
@@ -266,5 +267,364 @@
 
   .button-icon {
     font-size: 32px;
+  }
+}
+
+.mainCont{
+  position:relative;
+}
+.rectangleImg{
+  /* position:absolute;
+  left: 0;
+  bottom: 10; */
+}
+.scanImg{
+  position:absolute;
+  left: 20px;
+  top: 40px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.underScan{
+  position:absolute;
+  left: 20px;
+  top: 200px;
+  z-index: -1;
+}
+.printImg{
+  position:absolute;
+  left: 150px;
+  top: 270px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.underPrint{
+  position:absolute;
+  left:280px;
+  top: 300px;
+  z-index: -2;
+
+}
+.copyImg{
+  position:absolute;
+  left: 80px;
+  top: 490px;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.addImg{
+  position:absolute;
+  left: 80px;
+  top: 690px;
+  z-index: -1;
+  cursor: pointer;
+  transition: all 0.1s ease;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+}
+.underAdd{
+  position:absolute;
+  left: 140px;
+  top: 790px;
+  z-index: -2;
+}
+
+/* Анимации нажатия для кнопок */
+.scanImg:active,
+.printImg:active,
+.copyImg:active,
+.addImg:active {
+  transform: scale(0.95);
+  filter: brightness(0.9);
+  transition: all 0.05s ease;
+}
+
+/* Эффект волны (ripple) при нажатии */
+.scanImg:active::after,
+.printImg:active::after,
+.copyImg:active::after,
+.addImg:active::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 100%;
+  height: 100%;
+  background: radial-gradient(circle, rgba(255,255,255,0.3) 0%, rgba(255,255,255,0) 80%);
+  transform: translate(-50%, -50%) scale(0);
+  animation: ripple 0.3s ease-out;
+  pointer-events: none;
+  border-radius: 50%;
+}
+
+/* Анимация волны */
+@keyframes ripple {
+  0% {
+    transform: translate(-50%, -50%) scale(0);
+    opacity: 0.5;
+  }
+  100% {
+    transform: translate(-50%, -50%) scale(2);
+    opacity: 0;
+  }
+}
+
+/* Анимация нажатия для кнопки "На главную" */
+.home-button:active {
+  transform: scale(0.95);
+  background: #3d8b40;
+  transition: all 0.05s ease;
+}
+
+/* Дополнительная анимация для кнопки "Назад" */
+.back-button:active {
+  transform: scale(0.95);
+  background: #3d8b40;
+  transition: all 0.05s ease;
+}
+
+/* Стили для страницы печати */
+.print-page {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.print-card {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  border-radius: 20px;
+  padding: 40px;
+  width: 100%;
+  max-width: 500px;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+@keyframes slideIn {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.print-card h2 {
+  font-size: 28px;
+  margin-bottom: 30px;
+  color: #333;
+  text-align: center;
+}
+
+.form-group {
+  margin-bottom: 20px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 8px;
+  font-weight: 600;
+  color: #555;
+  font-size: 16px;
+}
+
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px 16px;
+  font-size: 16px;
+  border: 2px solid #e0e0e0;
+  border-radius: 12px;
+  transition: all 0.3s ease;
+  background: white;
+  font-family: inherit;
+}
+
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: #4CAF50;
+  box-shadow: 0 0 0 3px rgba(76, 175, 80, 0.1);
+}
+
+.form-group input:hover,
+.form-group textarea:hover {
+  border-color: #bbb;
+}
+
+.form-buttons {
+  display: flex;
+  gap: 15px;
+  margin-top: 30px;
+}
+
+.cancel-button,
+.submit-button {
+  flex: 1;
+  padding: 12px 24px;
+  font-size: 16px;
+  font-weight: 600;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.cancel-button {
+  background: #f5f5f5;
+  color: #666;
+}
+
+.cancel-button:hover {
+  background: #e0e0e0;
+  transform: scale(1.02);
+}
+
+.cancel-button:active {
+  transform: scale(0.98);
+}
+
+.submit-button {
+  background: linear-gradient(135deg, #4CAF50, #45a049);
+  color: white;
+}
+
+.submit-button:hover {
+  transform: scale(1.02);
+  box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
+}
+
+.submit-button:active {
+  transform: scale(0.98);
+}
+
+.keyboard-test-info {
+  margin-top: 20px;
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 12px;
+  font-size: 14px;
+  color: #666;
+  text-align: center;
+  border-left: 4px solid #4CAF50;
+}
+
+.keyboard-test-info p {
+  margin: 5px 0;
+}
+
+/* Исправление для страниц-заглушек */
+.other-page-container {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 500px;
+}
+
+.other-page {
+  text-align: center;
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(10px);
+  padding: 40px 60px;
+  border-radius: 20px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+  animation: slideIn 0.3s ease-out;
+}
+
+.other-page h2 {
+  font-size: 32px;
+  margin-bottom: 20px;
+  color: #333;
+}
+
+.other-page p {
+  font-size: 18px;
+  margin-bottom: 30px;
+  color: #666;
+}
+
+.back-button {
+  background: #4CAF50;
+  color: white;
+  border: none;
+  padding: 12px 32px;
+  font-size: 16px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.back-button:hover {
+  background: #45a049;
+  transform: scale(1.05);
+}
+
+.back-button:active {
+  transform: scale(0.95);
+}
+
+/* Адаптивность для страницы печати */
+@media (max-width: 768px) {
+  .print-card {
+    margin: 20px;
+    padding: 30px;
+  }
+  
+  .print-card h2 {
+    font-size: 24px;
+  }
+  
+  .form-group input,
+  .form-group textarea {
+    font-size: 16px;
+    padding: 10px 14px;
+  }
+  
+  .form-buttons {
+    flex-direction: column;
+  }
+  
+  .other-page {
+    padding: 30px 40px;
+    margin: 20px;
+  }
+  
+  .other-page h2 {
+    font-size: 24px;
+  }
+  
+  .other-page p {
+    font-size: 16px;
+  }
+}
+
+@media (max-width: 480px) {
+  .print-card {
+    padding: 20px;
+  }
+  
+  .print-card h2 {
+    font-size: 20px;
+  }
+  
+  .other-page {
+    padding: 20px 30px;
+  }
+  
+  .other-page h2 {
+    font-size: 20px;
   }
 }

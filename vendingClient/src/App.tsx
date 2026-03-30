@@ -1,104 +1,187 @@
 import { useState } from 'react'
 import './App.css'
+import rectangleImg from './assets/Rectangle1.png';
+import underScan from './assets/Vector1Scan.png'
+import underPrint from './assets/Rectangle3Print.png'
+import underAdd from './assets/VectorAdd.png'
+import scanImg from './assets/Frame 53.png'
+import printImg from './assets/Frame 54.png'
+import copyImg from './assets/Frame 55.png'
+import addImg from './assets/Frame 56.png'
 
 function App() {
-  const [activePage, setActivePage] = useState('main') // main, scan, print, copy, ad, support
+  const [activePage, setActivePage] = useState('main')
+  
+  // Состояния для полей ввода на странице печати
+  const [printName, setPrintName] = useState('')
+  const [printCopies, setPrintCopies] = useState('')
+  const [printComment, setPrintComment] = useState('')
 
-  // Обработчики для кнопок
   const handleScan = () => {
     console.log('Сканирование')
     setActivePage('scan')
-    // Здесь будет логика сканирования
   }
 
   const handlePrint = () => {
     console.log('Печать')
     setActivePage('print')
-    // Здесь будет логика печати
   }
 
   const handleCopy = () => {
     console.log('Копирование')
     setActivePage('copy')
-    // Здесь будет логика копирования
   }
 
   const handleAd = () => {
     console.log('Реклама')
     setActivePage('ad')
-    // Здесь будет логика рекламы
   }
 
   const handleSupport = () => {
     console.log('Техподдержка')
     setActivePage('support')
-    // Здесь будет логика техподдержки
   }
 
   const handleHome = () => {
     setActivePage('main')
+    // Очищаем поля при возврате на главную
+    setPrintName('')
+    setPrintCopies('')
+    setPrintComment('')
+  }
+
+  // Страница печати с инпутами для тестирования клавиатуры
+  const PrintPage = () => {
+    const handleSubmit = (e: React.FormEvent) => {
+      e.preventDefault()
+      console.log('Отправка на печать:', {
+        name: printName,
+        copies: printCopies,
+        comment: printComment
+      })
+      alert(`Печать:\nИмя: ${printName}\nКопий: ${printCopies}\nКомментарий: ${printComment}`)
+    }
+
+    return (
+      <div className="print-page">
+        <div className="print-card">
+          <h2>Печать документа</h2>
+          <form onSubmit={handleSubmit}>
+            <div className="form-group">
+              <label>Имя файла:</label>
+              <input
+                type="text"
+                value={printName}
+                onChange={(e) => setPrintName(e.target.value)}
+                placeholder="Введите имя файла"
+                autoFocus
+              />
+            </div>
+            
+            <div className="form-group">
+              <label>Количество копий:</label>
+              <input
+                type="number"
+                value={printCopies}
+                onChange={(e) => setPrintCopies(e.target.value)}
+                placeholder="1"
+                min="1"
+                max="99"
+              />
+            </div>
+            
+            <div className="form-group">
+              <label>Комментарий:</label>
+              <textarea
+                value={printComment}
+                onChange={(e) => setPrintComment(e.target.value)}
+                placeholder="Введите комментарий (опционально)"
+                rows={3}
+              />
+            </div>
+            
+            <div className="form-buttons">
+              <button type="button" className="cancel-button" onClick={handleHome}>
+                Отмена
+              </button>
+              <button type="submit" className="submit-button">
+                Отправить на печать
+              </button>
+            </div>
+          </form>
+          
+          <div className="keyboard-test-info">
+            <p>📝 Тестирование клавиатуры:</p>
+            <p>Кликните на любое поле ввода - должна появиться экранная клавиатура (если настроена в Linux)</p>
+          </div>
+        </div>
+      </div>
+    )
   }
 
   // Основная страница с 4 кнопками
   const MainPage = () => (
-    <div className="main-buttons-container">
-      <button className="main-button scan-button" onClick={handleScan}>
-        <span className="button-icon">📷</span>
-        Сканируй
-      </button>
-      <button className="main-button print-button" onClick={handlePrint}>
-        <span className="button-icon">🖨️</span>
-        Печатай
-      </button>
-      <button className="main-button copy-button" onClick={handleCopy}>
-        <span className="button-icon">📄</span>
-        Копируй
-      </button>
-      <button className="main-button ad-button" onClick={handleAd}>
-        <span className="button-icon">📢</span>
-        Хочу рекламу
-      </button>
+    <div className='mainCont'>
+      <img className='rectangleImg' src={rectangleImg} alt="" />
+      <img 
+        onClick={handleScan} 
+        className='scanImg' 
+        src={scanImg}
+        alt="Сканирование"
+      />
+      <img className='underScan' src={underScan} alt="" />
+      <img 
+        onClick={handlePrint} 
+        className='printImg' 
+        src={printImg}
+        alt="Печать"
+      />
+      <img className='underPrint' src={underPrint} alt="" />
+      <img 
+        onClick={handleCopy} 
+        className='copyImg' 
+        src={copyImg}
+        alt="Копирование"
+      />
+      <img 
+        onClick={handleAd} 
+        className='addImg' 
+        src={addImg}
+        alt="Реклама"
+      />
+      <img className='underAdd' src={underAdd} alt="" />
     </div>
   )
 
-  // Заглушки для других страниц
   const OtherPage = ({ title }: { title: string }) => (
-    <div className="other-page">
-      <h2>{title}</h2>
-      <p>Страница в разработке</p>
-      <button className="back-button" onClick={handleHome}>
-        Назад
-      </button>
+    <div className="other-page-container">
+      <div className="other-page">
+        <h2>{title}</h2>
+        <p>Страница в разработке</p>
+        <button className="back-button" onClick={handleHome}>
+          Назад
+        </button>
+      </div>
     </div>
   )
 
   return (
     <div className="app-container">
-      {/* Верхняя панель */}
       <header className="top-bar">
-        <div className="phone-number">📞 +7 (999) 123-45-67</div>
         <button className="home-button" onClick={handleHome}>
-          🏠 На главную
+          На главную
         </button>
-        <div className="phone-number-right">📞 +7 (999) 123-45-67</div>
+        <div className="phone-number-right">📞 +7 (495) 123-45-67</div>
       </header>
 
-      {/* Основной контент */}
       <main className="main-content">
         {activePage === 'main' && <MainPage />}
+        {activePage === 'print' && <PrintPage />}
         {activePage === 'scan' && <OtherPage title="Сканирование" />}
-        {activePage === 'print' && <OtherPage title="Печать" />}
         {activePage === 'copy' && <OtherPage title="Копирование" />}
         {activePage === 'ad' && <OtherPage title="Рекламные услуги" />}
         {activePage === 'support' && <OtherPage title="Техническая поддержка" />}
       </main>
-
-      {/* Нижняя панель с кнопкой техподдержки */}
-      <footer className="bottom-bar">
-        <button className="support-button" onClick={handleSupport}>
-          🛠️ Техподдержка
-        </button>
-      </footer>
     </div>
   )
 }
