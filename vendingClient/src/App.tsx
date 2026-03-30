@@ -37,11 +37,6 @@ function App() {
     setActivePage('ad')
   }
 
-  const handleSupport = () => {
-    console.log('Техподдержка')
-    setActivePage('support')
-  }
-
   const handleHome = () => {
     setActivePage('main')
     // Очищаем поля при возврате на главную
